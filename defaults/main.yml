@@ -1,3 +1,8 @@
 ---
+rpmfusion_free_repository: true
+rpmfusion_nonfree_repository: false
+
+rpmfusion_free_rpm_package_url: "{{ _rpmfusion_free_rpm_package_url }}"
+rpmfusion_nonfree_rpm_package_url: "{{ _rpmfusion_nonfree_rpm_package_url }}"
 
 ...

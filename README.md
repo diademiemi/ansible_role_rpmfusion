@@ -1,24 +1,18 @@
 Ansible Role Template
 =========
 
-[![Molecule Test](https://github.com/diademiemi/ansible_role_template/actions/workflows/molecule.yml/badge.svg)](https://github.com/diademiemi/ansible_role_template/actions/workflows/molecule.yml)
+[![Molecule Test](https://github.com/diademiemi/ansible_role_rpmfusion/actions/workflows/molecule.yml/badge.svg)](https://github.com/diademiemi/ansible_role_rpmfusion/actions/workflows/molecule.yml)
 
-This is an Ansible role to install and configure template.
+This is an Ansible role to add the RPMFusion repositories.
 
-Include more information about template in this section.
+Include more information about rpmfusion in this section.
 
 Requirements
 ------------
 These platforms are supported:
-- Ubuntu 20.04
-- Ubuntu 22.04
-- Debian 10
-- Debian 11
-- Debian 12
 - EL 8 (Tested on Rocky Linux 8)
 - EL 9 (Tested on Rocky Linux 9)
 - Fedora 38
-- openSUSE Leap 15.4
 
 <!--
 - List hardware requirements here  
@@ -44,11 +38,11 @@ Example Playbook
 ----------------
 
 ```yaml
-- name: Use diademiemi.template role
-  hosts: "{{ target | default('template') }}"
+- name: Use diademiemi.rpmfusion role
+  hosts: "{{ target | default('rpmfusion') }}"
   roles:
-    - role: "diademiemi.template"
-      tags: ['diademiemi', 'template', 'setup']    ```
+    - role: "diademiemi.rpmfusion"
+      tags: ['diademiemi', 'rpmfusion', 'setup']    ```
 
 ```
 
@@ -80,38 +74,3 @@ molecule test
 
 These tests are automatically ran by GitHub Actions on push. If the tests are successful, the role is automatically published to Ansible Galaxy.
 
-Role Structure
---------------
-
-Roles have an entrypoint `main.yml` which includes other files.  
-For every file in `vars/`, `tasks/assert/` that matches the host these vars will be imported and assertions will be ran. For `tasks/setup` only the file most closely resembling the host will ran. If other tasks are necessary they can be included. If no file is found, it falls back to `default.yml`.  
-
-A variable `__role_action` can be used to change the path from `tasks/setup`. This can be useful when tasks should be run to revert the steps from the role or include a role from an upstream collection (E.g. including the Checkmk collection `tribe29.checkmk.agent` role instead of one's own). This can also be a list to chain these together (E.g. include preparation/post-setup tasks around the upstream role).  
-
-Please see [tasks/upstream/default.yml](./tasks/upstream/default.yml) for an example on how to include an upstream role.  
-
-This is an easy way to provide distro-specific variables, assertions and tasks and allows me to keep the role structure clean.  
-
-GitHub Actions is supposed to fail for this template repository, as it does not contain any meaningful role. There is an explicit assertion to check if the role name has been changed from `template` which causes the test to fail.  
-
-Using Template
---------------
-To use this template for a new role, run
-
-
-```bash
-export NEW_ROLE_NAME="NEW_NAME"
-export GITHUB_USER="diademiemi"
-export GALAXY_API_KEY="YOUR_API_KEY"
-
-find . -type f -exec sed -i "s/diademiemi/${GITHUB_USER}/g" {} + # Do not run this more than once
-find . -type f -exec sed -i "s/template/${NEW_ROLE_NAME}/g" {} + # Do not run this more than once
-
-# Assumes repo is named ansible_role_${NEW_ROLE_NAME}
-gh secret set GALAXY_API_KEY -R ${GITHUB_USER}/ansible_role_${NEW_ROLE_NAME} -a actions -b ${GALAXY_API_KEY}
-
-# Remove this section from README.md
-sed -i "/Role Structure/Q" README.md
-```
-
-This is also provided as a script as `replace.sh`.  

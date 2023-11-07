@@ -1,4 +1,4 @@
-Ansible Role Template
+Ansible Role RPMFusion
 =========
 
 [![Molecule Test](https://github.com/diademiemi/ansible_role_rpmfusion/actions/workflows/molecule.yml/badge.svg)](https://github.com/diademiemi/ansible_role_rpmfusion/actions/workflows/molecule.yml)
@@ -23,11 +23,13 @@ Role Variables
 
 Variable | Default | Description
 --- | --- | ---
-<!--
-`variable` | `default` | Variable example
-`long_variable` | See [defaults/main.yml](./defaults/main.yml) | Variable referring to defaults
-`distro_specific_variable` | See [vars/debian.yml](./vars/debian.yml) | Variable referring to distro-specific variables
--->
+`rpmfusion_free_repository` | `true` | Indicates whether the RPM Fusion free repository is enabled. Defaults to `true`.
+`rpmfusion_nonfree_repository` | `false` | Indicates whether the RPM Fusion nonfree repository is enabled. Defaults to `false`.
+`rpmfusion_free_rpm_package_url` | `{{ _rpmfusion_free_rpm_package_url }}` | The URL for RPM packages in the RPM Fusion free repository. Defaults to the value of `_rpmfusion_free_rpm_package_url`.
+`rpmfusion_nonfree_rpm_package_url` | `{{ _rpmfusion_nonfree_rpm_package_url }}` | The URL for RPM packages in the RPM Fusion nonfree repository. Defaults to the value of `_rpmfusion_nonfree_rpm_package_url`.
+...
+
+See [./vars/](./vars/) for distro-specific variables.
 
 Dependencies
 ------------

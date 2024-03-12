@@ -2,15 +2,15 @@
 dependency:
   name: galaxy
 driver:
-  name: podman
+  name: docker
 platforms:
   - name: el8
     image: docker.io/geerlingguy/docker-rockylinux8-ansible
     pre_build_image: true
     systemd: true
     tmpfs:
-      "/tmp": "rw,exec,mode=1777"
-      "/run": "rw,noexec,nosuid,nodev"
+     - /tmp
+     - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cgroupns_mode: host
@@ -21,8 +21,8 @@ platforms:
     pre_build_image: true
     systemd: true
     tmpfs:
-      "/tmp": "rw,exec,mode=1777"
-      "/run": "rw,noexec,nosuid,nodev"
+     - /tmp
+     - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cgroupns_mode: host
@@ -33,8 +33,8 @@ platforms:
     pre_build_image: true
     systemd: true
     tmpfs:
-      "/tmp": "rw,exec,mode=1777"
-      "/run": "rw,noexec,nosuid,nodev"
+     - /tmp
+     - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cgroupns_mode: host

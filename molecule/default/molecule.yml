@@ -7,10 +7,7 @@ platforms:
   - name: el8
     image: docker.io/geerlingguy/docker-rockylinux8-ansible
     pre_build_image: true
-    systemd: true
-    tmpfs:
-     - /tmp
-     - /run
+    systemd: always
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cgroupns_mode: host
@@ -19,10 +16,7 @@ platforms:
   - name: el9
     image: docker.io/geerlingguy/docker-rockylinux9-ansible
     pre_build_image: true
-    systemd: true
-    tmpfs:
-     - /tmp
-     - /run
+    systemd: always
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cgroupns_mode: host
@@ -31,10 +25,7 @@ platforms:
   - name: fedora38
     image: docker.io/geerlingguy/docker-fedora38-ansible
     pre_build_image: true
-    systemd: true
-    tmpfs:
-     - /tmp
-     - /run
+    systemd: always
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cgroupns_mode: host
